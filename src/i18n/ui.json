@@ -1,0 +1,22 @@
+{
+  "en": {
+    "backLink": "← Back",
+    "siteTitle": "Gustavo Miranda",
+    "tagline": "Software engineer writing about web development, tools, and things I learn along the way.",
+    "notFoundTitle": "404 — Not Found",
+    "notFoundHeading": "404",
+    "notFoundText": "Page not found.",
+    "notFoundBack": "← Back to home",
+    "footerCopyright": "© {year}"
+  },
+  "pt-br": {
+    "backLink": "← Voltar",
+    "siteTitle": "Gustavo Miranda",
+    "tagline": "Engenheiro de software escrevendo sobre desenvolvimento web, ferramentas e coisas que aprendo pelo caminho.",
+    "notFoundTitle": "404 — Não Encontrado",
+    "notFoundHeading": "404",
+    "notFoundText": "Página não encontrada.",
+    "notFoundBack": "← Voltar ao início",
+    "footerCopyright": "© {year}"
+  }
+}

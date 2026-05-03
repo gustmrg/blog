@@ -1,11 +1,12 @@
 ---
 import Base from "../layouts/Base.astro";
+import { t } from "../i18n/utils";
 ---
 
-<Base title="404 — Not Found">
+<Base title={t("en", "notFoundTitle")}>
   <section class="not-found">
     <h1>404</h1>
-    <p>Page not found.</p>
-    <a href="/">&larr; Back to home</a>
+    <p>{t("en", "notFoundText")}</p>
+    <a href="/">{t("en", "notFoundBack")}</a>
   </section>
 </Base>

@@ -5,6 +5,9 @@
     "title": {
       "type": "string"
     },
+    "slug": {
+      "type": "string"
+    },
     "date": {
       "type": "string"
     },
@@ -24,6 +27,7 @@
   },
   "required": [
     "title",
+    "slug",
     "date",
     "description"
   ]
