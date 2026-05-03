@@ -1,43 +1,35 @@
-# Astro Starter Kit: Minimal
+# Blog
 
-```sh
-npm create astro@latest -- --template minimal
-```
+![Astro](https://img.shields.io/badge/Astro-6.1.9-FF5D01?logo=astro)
+![Latest Release](https://img.shields.io/github/v/release/gustmrg/blog)
+![License](https://img.shields.io/github/license/gustmrg/blog)
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+A minimalist personal blog built with Astro.
 
-## 🚀 Project Structure
+---
 
-Inside of your Astro project, you'll see the following folders and files:
+## Features
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+- Astro static site setup
+- Light and dark theme support
+- Localized content in `en` and `pt-br`
+- Locale-aware post listings and post routes
+- Responsive blog layout
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## License
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+This project is licensed under the MIT License. See [`LICENSE`](./LICENSE) for details.
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Content Structure
 
-## 🧞 Commands
+Posts live in localized collections:
 
-All commands are run from the root of the project, from a terminal:
+- `src/content/posts/en`
+- `src/content/posts/pt-br`
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+Public pages are split by locale:
 
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- `/` for English
+- `/pt-br` for Portuguese
+- `/posts/[slug]` for English posts
+- `/pt-br/posts/[slug]` for Portuguese posts
