@@ -21,15 +21,21 @@ const { title, description = "A minimalist blog" } = Astro.props;
   <body>
     <div class="layout">
       <header>
-        <nav>
-          <a href="/" class="site-title">Blog</a>
-        </nav>
+        <a href="/" class="site-title">Gustavo Miranda</a>
+        <p class="tagline">Software engineer writing about web development, tools, and things I learn along the way.</p>
       </header>
       <main>
         <slot />
       </main>
       <footer>
         <p>&copy; {new Date().getFullYear()}</p>
+        <nav class="social-links">
+          <a href="#">GitHub</a>
+          <span>·</span>
+          <a href="#">LinkedIn</a>
+          <span>·</span>
+          <a href="#">Email</a>
+        </nav>
       </footer>
     </div>
   </body>

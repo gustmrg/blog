@@ -56,8 +56,34 @@ body {
 /* Header */
 
 header {
-  padding: 2rem 0;
+  padding: 1.5rem 0;
   border-bottom: 1px solid var(--border);
+}
+
+.site-title {
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  text-decoration: none;
+  display: block;
+}
+
+.site-title:hover {
+  color: var(--accent);
+}
+
+.tagline {
+  margin: 0.25rem 0 0;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+/* Main */
+
+main {
+  flex: 1;
+  padding: 2rem 0;
 }
 
 header nav {
@@ -71,6 +97,7 @@ header nav {
   font-weight: 700;
   color: var(--text-heading);
   text-decoration: none;
+  margin: 0;
 }
 
 .site-title:hover {
@@ -91,6 +118,38 @@ footer {
   border-top: 1px solid var(--border);
   color: var(--text-muted);
   font-size: 0.875rem;
+  text-align: center;
+}
+
+footer p {
+  margin: 0 0 0.5rem;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.social-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.social-links a:hover {
+  color: var(--accent);
+}
+
+/* Intro (header variant on homepage) */
+
+header.intro .site-title {
+  font-size: 1.75rem;
+}
+
+header.intro p {
+  margin: 0;
+  color: var(--text-muted);
 }
 
 /* Post list */
