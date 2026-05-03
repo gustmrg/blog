@@ -1,5 +1,6 @@
 ---
 title: "Hello World"
+slug: "hello-world"
 date: "2026-04-26"
 description: "The first post on this blog. A brief introduction to what you'll find here."
 tags: ["meta", "introduction"]

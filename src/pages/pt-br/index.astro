@@ -1,0 +1,28 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+
+const posts = (await getCollection("postsPtBr")).sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+---
+
+<Base title="Blog" locale="pt-br">
+  <section class="post-list">
+    {posts.map((post) => (
+      <article class="post-card">
+        <a href={`/pt-br/posts/${post.data.slug}`}>
+          <h2>{post.data.title}</h2>
+        </a>
+        <time datetime={post.data.date}>
+          {new Date(post.data.date + "T00:00:00").toLocaleDateString("pt-BR", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+        </time>
+        <p>{post.data.description}</p>
+      </article>
+    ))}
+  </section>
+</Base>
