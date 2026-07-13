@@ -10,6 +10,9 @@ interface Props {
 
 const { title, description = "A minimalist blog", locale = "en" } = Astro.props;
 const currentPath = Astro.url.pathname;
+const homePath = locale === "en" ? "/" : "/pt-br/";
+const englishPath = "/" + currentPath.replace(/^\/pt-br\/?/, "");
+const portuguesePath = `/pt-br${currentPath}`;
 ---
 
 <!doctype html>
@@ -19,119 +22,124 @@ const currentPath = Astro.url.pathname;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <meta id="theme-color" name="theme-color" content="#fcfcfb" />
     <title>{title}</title>
     <script is:inline>
       (function () {
-        const saved = localStorage.getItem("theme");
-        const prefersDark = window.matchMedia(
-          "(prefers-color-scheme: dark)"
-        ).matches;
-        if (saved === "dark" || (saved !== "light" && prefersDark)) {
-          document.documentElement.classList.add("dark");
-        } else {
-          document.documentElement.classList.add("light");
-        }
+        let saved = null;
+        try {
+          saved = localStorage.getItem("theme");
+        } catch {}
+
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const theme = saved === "dark" || (saved !== "light" && prefersDark)
+          ? "dark"
+          : "light";
+
+        document.documentElement.classList.add(theme);
+        document.querySelector('meta[name="theme-color"]')?.setAttribute(
+          "content",
+          theme === "dark" ? "#101114" : "#fcfcfb"
+        );
       })();
     </script>
   </head>
   <body>
+    <a class="skip-link" href="#main-content">{t(locale, "skipToContent")}</a>
+
     <div class="layout">
-      <header>
+      <header class="site-header">
         <div class="header-main">
           <div class="header-brand">
-            <a href={locale === "en" ? "/" : "/pt-br/"} class="site-title"
-              >Gustavo Miranda</a
-            >
+            <a href={homePath} class="site-title">{t(locale, "siteTitle")}</a>
             <p class="tagline">{t(locale, "tagline")}</p>
           </div>
-          <nav class="lang-switcher">
+
+          <nav class="lang-switcher" aria-label={t(locale, "languageNavLabel")}>
             {locale === "en" ? (
-              <span class="active">EN</span>
+              <span class="active" aria-current="true">EN</span>
             ) : (
-              <a
-                href={"/" + currentPath.replace(/^\/pt-br\/?/, "")}
-                aria-label="Switch to English"
-              >EN</a>
+              <a href={englishPath} hreflang="en" lang="en" aria-label={t(locale, "switchToEnglish")}>EN</a>
             )}
-            <span>·</span>
+            <span class="separator" aria-hidden="true">·</span>
             {locale === "pt-br" ? (
-              <span class="active">PT</span>
+              <span class="active" aria-current="true">PT</span>
             ) : (
-              <a
-                href={`/pt-br${currentPath}`}
-                aria-label="Switch to Portuguese"
-              >PT</a>
+              <a href={portuguesePath} hreflang="pt-BR" lang="pt-BR" aria-label={t(locale, "switchToPortuguese")}>PT</a>
             )}
           </nav>
         </div>
       </header>
-      <main>
+
+      <main id="main-content" tabindex="-1">
         <slot />
       </main>
-      <footer>
-        <div class="footer-top">
+
+      <footer class="site-footer">
+        <div class="footer-meta">
           <p>{t(locale, "footerCopyright").replace("{year}", String(new Date().getFullYear()))}</p>
-          <button
-            class="theme-toggle"
-            aria-label="Toggle theme"
-            onclick="toggleTheme()"
-          >
-            <svg
-              class="sun"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <circle cx="12" cy="12" r="5"></circle>
-              <line x1="12" y1="1" x2="12" y2="3"></line>
-              <line x1="12" y1="21" x2="12" y2="23"></line>
-              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-              <line x1="1" y1="12" x2="3" y2="12"></line>
-              <line x1="21" y1="12" x2="23" y2="12"></line>
-              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-            </svg>
-            <svg
-              class="moon"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-            </svg>
-          </button>
+          <span class="separator" aria-hidden="true">·</span>
+          <a href="https://github.com/gustmrg" rel="me">GitHub</a>
         </div>
-        <nav class="social-links">
-          <a href="#">GitHub</a>
-          <span>·</span>
-          <a href="#">LinkedIn</a>
-          <span>·</span>
-          <a href="#">Email</a>
-        </nav>
+
+        <button
+          class="theme-toggle"
+          type="button"
+          aria-pressed="false"
+          aria-label={t(locale, "useDarkTheme")}
+          data-light-label={t(locale, "useLightTheme")}
+          data-dark-label={t(locale, "useDarkTheme")}
+        >
+          <svg class="sun" aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="moon" aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
       </footer>
     </div>
 
     <script is:inline>
-      function toggleTheme() {
-        const isDark = document.documentElement.classList.toggle("dark");
-        if (isDark) {
-          document.documentElement.classList.remove("light");
-        } else {
-          document.documentElement.classList.add("light");
+      const themeToggle = document.querySelector(".theme-toggle");
+
+      function setTheme(theme) {
+        const isDark = theme === "dark";
+        document.documentElement.classList.toggle("dark", isDark);
+        document.documentElement.classList.toggle("light", !isDark);
+        document.querySelector('meta[name="theme-color"]')?.setAttribute(
+          "content",
+          isDark ? "#101114" : "#fcfcfb"
+        );
+
+        if (themeToggle instanceof HTMLButtonElement) {
+          themeToggle.setAttribute("aria-pressed", String(isDark));
+          themeToggle.setAttribute(
+            "aria-label",
+            isDark ? themeToggle.dataset.lightLabel : themeToggle.dataset.darkLabel
+          );
         }
-        localStorage.setItem("theme", isDark ? "dark" : "light");
       }
+
+      setTheme(document.documentElement.classList.contains("dark") ? "dark" : "light");
+
+      themeToggle?.addEventListener("click", () => {
+        const nextTheme = document.documentElement.classList.contains("dark")
+          ? "light"
+          : "dark";
+        setTheme(nextTheme);
+        try {
+          localStorage.setItem("theme", nextTheme);
+        } catch {}
+      });
     </script>
   </body>
 </html>

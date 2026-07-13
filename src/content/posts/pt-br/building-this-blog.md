@@ -6,8 +6,6 @@ description: "Uma olhada em como este blog minimalista foi construído com Astro
 tags: ["astro", "markdown", "blog"]
 ---
 
-# Construindo Este Blog
-
 Este blog é intencionalmente simples. Sem CMS, sem banco de dados, sem servidor. Apenas arquivos markdown e um site estático.
 
 ## A stack

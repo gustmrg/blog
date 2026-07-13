@@ -6,8 +6,6 @@ description: "The first post on this blog. A brief introduction to what you'll f
 tags: ["meta", "introduction"]
 ---
 
-# Hello World
-
 Welcome to the blog. This is the very first post.
 
 ## What to expect

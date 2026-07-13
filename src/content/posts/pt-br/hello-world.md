@@ -6,8 +6,6 @@ description: "A primeira postagem neste blog. Uma breve introdução do que voc�
 tags: ["meta", "introdução"]
 ---
 
-# Olá Mundo
-
 Bem-vindo ao blog. Este é o primeiro post.
 
 ## O que esperar

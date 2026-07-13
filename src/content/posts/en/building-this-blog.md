@@ -6,8 +6,6 @@ description: "A look at how this minimalist blog was built with Astro and markdo
 tags: ["astro", "markdown", "blog"]
 ---
 
-# Building This Blog
-
 This blog is intentionally simple. No CMS, no database, no server. Just markdown files and a static site built with Astro.
 
 ## The stack
